@@ -6,11 +6,11 @@ class CartsController < ApplicationController
 
   def show
     @user = current_user
+    # if being loaded by ajax, only partial
+    # otherwise render everything
     if request.xhr?
       render 'carts/modal', layout: false
     end
-    # if being loaded by ajax, only partial
-    # otherwise render everything
   end
 
   def add_item
@@ -24,15 +24,21 @@ class CartsController < ApplicationController
   end
 
   def remove_item
-    # find item with current_user's id and param[:item_id] and delete it
+    p "=" * 40
     item_to_remove = current_user.shopping_carts.where(item_id: params[:item_id], user_id: current_user.id).first
     item_to_remove.destroy
-    flash[:success] = "#{item_to_remove.item.name} removed from cart."
-    redirect_to '/cart'
+    if request.xhr?
+      render :text => "Success"
+    else
+      flash[:success] = "#{item_to_remove.item.name} removed from cart."
+      redirect_to '/cart'
+    end
   end
 
   def clear_cart
-    current_user.shopping_carts.destroy
+    current_user.shopping_carts.each(&:destroy)
+    flash[:success] = "Shopping cart cleared."
+    redirect_to '/cart'
   end
 
   def checkout
