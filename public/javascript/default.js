@@ -18,8 +18,12 @@ function addToCart() {
     })
 
     ajaxRequest.done(function(successResponse) {
-      $('.cart-count').text(successResponse);
-      $(".cart-button").fadeIn(100).fadeOut(100).fadeIn(100);
+      if (parseInt(successResponse)){
+        $('.cart-count').text(successResponse);
+        $(".cart-button").fadeIn(100).fadeOut(100).fadeIn(100);
+      }else {
+        $( '.navbar' ).append(successResponse)
+      }
     });
 
     ajaxRequest.fail(function(failureResponse) {

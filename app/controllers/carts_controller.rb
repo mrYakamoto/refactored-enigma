@@ -28,8 +28,10 @@ class CartsController < ApplicationController
     else
       if request.xhr?
         p "ajax error"
-        render :status => 499
-        render 'carts/error'
+        # render :nothing => true
+        # render :status => 499
+        render 'carts/error', layout: false
+
       else
         flash[:error] = "There is not enough stock of #{item.name} to add to your cart."
         redirect_to '/cart'
@@ -38,7 +40,6 @@ class CartsController < ApplicationController
   end
 
   def remove_item
-    p "=" * 40
     item_to_remove = current_user.shopping_carts.where(item_id: params[:item_id], user_id: current_user.id).first
     item_to_remove.destroy
     if request.xhr?
