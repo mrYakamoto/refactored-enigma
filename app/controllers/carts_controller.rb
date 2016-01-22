@@ -32,7 +32,12 @@ class CartsController < ApplicationController
   end
 
   def clear_cart
-    render :text => "Cart cleared"
+    current_user.shopping_carts.destroy
+  end
+
+  def checkout
+    flash[:notice] = "Checking out..."
+    redirect_to '/cart'
   end
 
 end

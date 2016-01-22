@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'cart' => 'carts#add_item'
   delete 'cart' => 'carts#remove_item'
   post 'cart/clear' => 'carts#clear_cart'
+  post 'cart/checkout' => 'carts#checkout'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
