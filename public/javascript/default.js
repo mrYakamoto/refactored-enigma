@@ -22,7 +22,7 @@ function addToCart() {
         $('.cart-count').text(successResponse);
         $(".cart-button").fadeIn(100).fadeOut(100).fadeIn(100);
       }else {
-        $( '.navbar' ).append(successResponse)
+        $( '.navbar' ).append(successResponse);
       }
     });
 

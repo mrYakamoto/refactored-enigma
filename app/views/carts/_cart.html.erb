@@ -14,7 +14,7 @@
   <% total += item.price %>
   <tr>
     <td><a href="/items/<%= item.id %>"><%= item.name %></a></td>
-    <td><%= item.formatted_price %></td>
+    <td>$<%= item.formatted_price %></td>
     <td><%= form_for :item, url: '/cart', method: :delete, html: {:class => 'form-horizontal pull-right delete-from-cart-form'}  do |f| %>
           <%= hidden_field_tag 'item_id', item.id %>
           <button id="remove-from-cart" name="remove-from-cart" class="btn btn-xs btn-primary btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</button>
@@ -30,10 +30,10 @@
 </table>
 <div>
   <%= form_for :item, url: '/cart/checkout', method: :post, html: {:class => 'form-horizontal pull-right'}  do |f| %>
-  <button type="submit" id="clear-cart" name="clear-cart" type="button" class="btn btn-primary">Checkout</button>
+  <button type="submit" id="checkout-cart" name="clear-cart" type="button" class="btn btn-primary">Checkout</button>
   <% end %>
   <%= form_for :item, url: '/cart/clear', method: :post, html: {:class => 'form-horizontal pull-right clear-cart-form'}  do |f| %>
-  <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Clear Cart</button>
+  <button type="submit" id="clear-cart" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Clear Cart</button>
   <% end %>
 </div>
 <% end %>
