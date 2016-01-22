@@ -6,6 +6,7 @@
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag '/javascript/default' %>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <%= stylesheet_link_tag "/css/default" %>
@@ -38,6 +39,7 @@
     </center>
   <% end %>
 <%= yield %>
+<!-- login modal -->
 <div class="modal fade" id="login-form" tabindex="-1" role="dialog" aria-labelledby="login-form">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -51,7 +53,7 @@
     </div>
   </div>
 </div>
-<!-- Button trigger modal -->
+<!-- cart modal -->
 <div class="modal fade" id="shopping-cart" tabindex="-1" role="dialog" aria-labelledby="shopping-cart">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">

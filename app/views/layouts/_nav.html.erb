@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if authenticated? %>
       <form class="navbar-form navbar-right" action="<%=  %>">
-        <a href="/cart" class="btn btn-primary btn-success" data-toggle="modal" data-target="#shopping-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge"><%= current_user.items.count %></span></a>
+        <a href="/cart" class="btn btn-primary btn-success cart-button" data-toggle="modal" data-target="#shopping-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge cart-count"><%= current_user.items.count %></span></a>
       </form>
       <% end %>
       <ul class="nav navbar-nav navbar-right">

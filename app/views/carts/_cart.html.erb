@@ -4,7 +4,6 @@
 <table class="table">
   <thead>
     <tr>
-      <th>#</th>
       <th>Item</th>
       <th>Price</th>
       <th></th>
@@ -14,10 +13,9 @@
   <% @user.items.each_with_index do |item, index| %>
   <% total += item.price %>
   <tr>
-    <td><%= index + 1 %></td>
-    <td><%= item.name %></td>
-    <td><%= item.formatted_price %></td>
-    <td><%= form_for :item, url: '/cart', method: :delete, html: {:class => 'form-horizontal pull-right'}  do |f| %>
+    <td><a href="/items/<%= item.id %>"><%= item.name %></a></td>
+    <td>$<%= item.formatted_price %></td>
+    <td><%= form_for :item, url: '/cart', method: :delete, html: {:class => 'form-horizontal pull-right delete-from-cart-form'}  do |f| %>
           <%= hidden_field_tag 'item_id', item.id %>
           <button id="remove-from-cart" name="remove-from-cart" class="btn btn-xs btn-primary btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</button>
           <% end %>
@@ -27,8 +25,15 @@
   <tr>
     <td></td>
     <td></td>
-    <td></td>
-    <td><strong>Total:</strong><p class="pull-right"><%= total %></p></td>
+    <td><strong>Total:</strong><p class="pull-right">$<%= '%.2f' % total %></p></td>
   </tr>
 </table>
+<div>
+  <%= form_for :item, url: '/cart/checkout', method: :post, html: {:class => 'form-horizontal pull-right'}  do |f| %>
+  <button type="submit" id="checkout-cart" name="clear-cart" type="button" class="btn btn-primary">Checkout</button>
+  <% end %>
+  <%= form_for :item, url: '/cart/clear', method: :post, html: {:class => 'form-horizontal pull-right clear-cart-form'}  do |f| %>
+  <button type="submit" id="clear-cart" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Clear Cart</button>
+  <% end %>
+</div>
 <% end %>
