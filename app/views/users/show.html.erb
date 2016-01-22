@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= @user.firstname %>'s Profile</h3>
+    </div>
+    <div class="panel-body">
+      <% if current_user == @user %>
+      <p>This is your profile.</p>
+      <p><a href="/cart">your shopping cart</a></p>
+      <% else %>
+      <p>This is the public profile for <%= @user.firstname %>.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

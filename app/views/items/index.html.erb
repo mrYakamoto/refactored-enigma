@@ -1,0 +1,34 @@
+<div class="container">
+   <center>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Shoppe</h1>
+        <h5>We have everything you'll ever need. Except chocolate.</h5>
+      </div>
+    </div>
+    <div class="page-header">
+      <h1>All items for sale</h1>
+    </div>
+    <div class="row">
+      <% @items.each do |item| %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <%= link_to image_tag(item.picture_url, :height => "200px", :style => "border-radius: 50%"), item_path(item) %>
+        <h5><%= link_to "#{item.name}", item_path(item) %></h5>
+        <p>Price: $<%= item.formatted_price %></p>
+        <% if authenticated? %>
+        <p><%= form_for :item, url: '/cart', html: {:class => 'form-horizontal'}  do |f| %>
+          <%= hidden_field_tag 'item_id', item.id %>
+          <button id="add-to-cart" name="add-to-cart" class="btn btn-xs btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span> Add to Cart</button></p>
+        <% end %>
+        <% end %>
+        <% if current_user && current_user.is_admin? %>
+        <p><%= link_to 'Edit', edit_item_path(item) %></p>
+        <p><%= link_to 'Delete', item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        <% end %>
+        <hr>
+      </div>
+      <% end %>
+      <hr>
+    </div>
+  </center>
+</div>

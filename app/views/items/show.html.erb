@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="thumbnail">
+      <img src="<%= @item.picture_url %>" title="<%= @item.name %>">
+      <div class="caption">
+        <h3><%= @item.name %></h3>
+        <p><strong>Price:</strong> $<%= @item.formatted_price %></p>
+        <p><strong>In stock:</strong> <%= @item.quantity %></p>
+        <p><strong>UPC:</strong> <%= @item.upc.upcase %></p>
+        <p><strong>Description:</strong></p>
+        <p><%= @item.description %></p>
+        <%= form_for :item, url: '/cart', html: {:class => 'form-horizontal'}  do |f| %>
+          <%= hidden_field_tag 'item_id', @item.id %>
+          <button id="add-to-cart" name="add-to-cart" class="btn btn-block btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span> Add to Cart</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
