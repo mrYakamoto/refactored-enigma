@@ -25,6 +25,7 @@ function addToCart() {
     ajaxRequest.fail(function(failureResponse) {
       $(".cart-button").fadeIn(100).fadeOut(100).fadeIn(100).fadeIn(100).fadeOut(100).fadeIn(100);
       $(".cart-button").removeClass('btn-success').addClass('btn-danger');
+      console.log(failureResponse)
     });
   });
 };

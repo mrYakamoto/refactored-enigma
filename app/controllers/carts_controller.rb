@@ -14,12 +14,26 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    current_user.shopping_carts.create(item_id: params[:item_id])
-    if request.xhr?
-      render :text => current_user.items.count
+    item = Item.find(params[:item_id])
+    quantity_in_stock = item.quantity
+    quantity_in_cart = current_user.shopping_carts.where(item_id: params[:item_id]).count
+    if quantity_in_cart < quantity_in_stock
+      current_user.shopping_carts.create(item_id: params[:item_id])
+      if request.xhr?
+        render :text => current_user.items.count
+      else
+        flash[:success] = "Item added to cart."
+        redirect_to '/cart'
+      end
     else
-      flash[:success] = "Item added to cart."
-      redirect_to '/cart'
+      if request.xhr?
+        p "ajax error"
+        render :status => 499
+        render 'carts/error'
+      else
+        flash[:error] = "There is not enough stock of #{item.name} to add to your cart."
+        redirect_to '/cart'
+      end
     end
   end
 
@@ -45,5 +59,4 @@ class CartsController < ApplicationController
     flash[:notice] = "Checking out..."
     redirect_to '/cart'
   end
-
 end
