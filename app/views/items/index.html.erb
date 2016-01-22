@@ -9,14 +9,14 @@
     <div class="page-header">
       <h1>All items for sale</h1>
     </div>
-    <div class="row">
+    <div class="row item-list">
       <% @items.each do |item| %>
-      <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="col-xs-12 col-sm-6 col-md-4 item-view">
         <%= link_to image_tag(item.picture_url, :height => "200px", :style => "border-radius: 50%"), item_path(item) %>
         <h5><%= link_to "#{item.name}", item_path(item) %></h5>
         <p>Price: $<%= item.formatted_price %></p>
         <% if authenticated? %>
-        <p><%= form_for :item, url: '/cart', html: {:class => 'form-horizontal'}  do |f| %>
+        <p><%= form_for :item, url: '/cart', html: {:class => 'form-horizontal add-to-cart-form'}  do |f| %>
           <%= hidden_field_tag 'item_id', item.id %>
           <button id="add-to-cart" name="add-to-cart" class="btn btn-xs btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span> Add to Cart</button></p>
         <% end %>

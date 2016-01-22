@@ -28,7 +28,15 @@
     <td></td>
     <td></td>
     <td></td>
-    <td><strong>Total:</strong><p class="pull-right"><%= total %></p></td>
+    <td><strong>Total:</strong><p class="pull-right">$<%= '%.2f' % total %></p></td>
   </tr>
 </table>
+<div>
+  <%= form_for :item, url: '/cart/clear', method: :post, html: {:class => 'form-horizontal pull-right'}  do |f| %>
+  <button type="button" class="btn btn-primary">Checkout</button>
+  <% end %>
+  <%= form_for :item, url: '/cart/checkout', method: :post, html: {:class => 'form-horizontal pull-right'}  do |f| %>
+  <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Clear Cart</button>
+  <% end %>
+</div>
 <% end %>

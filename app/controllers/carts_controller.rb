@@ -14,12 +14,13 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    p "=" * 100
-    p params.inspect
-    p "=" * 100
     current_user.shopping_carts.create(item_id: params[:item_id])
-    flash[:success] = "Item added to cart."
-    redirect_to '/cart'
+    if request.xhr?
+      render :text => current_user.items.count
+    else
+      flash[:success] = "Item added to cart."
+      redirect_to '/cart'
+    end
   end
 
   def remove_item
@@ -31,6 +32,7 @@ class CartsController < ApplicationController
   end
 
   def clear_cart
+    render :text => "Cart cleared"
   end
 
 end
