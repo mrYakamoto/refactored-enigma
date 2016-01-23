@@ -35,7 +35,10 @@ group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'rspec-rails'
+  gem 'capybara'
   gem 'shoulda-matchers'
+  gem 'selenium-webdriver'
+
 end
 
 group :development, :test do

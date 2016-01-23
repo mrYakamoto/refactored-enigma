@@ -25,7 +25,7 @@ RSpec.describe ItemsController, type: :controller do
 
   describe 'item create' do
     context 'when given valid params' do
-      let :item_params do
+      let(:item_params) do
         {name: 'hat',
          price: 100,
          description: 'a hat',
